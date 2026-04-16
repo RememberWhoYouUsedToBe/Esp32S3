@@ -3,7 +3,7 @@
 
 #define LED_PIN     48
 #define NUM_LEDS    1
-#define BRIGHTNESS  45          // 亮度 0~255，建议 50~150 之间，太亮刺眼
+#define BRIGHTNESS  35          // 亮度 0~255，建议 50~150 之间，太亮刺眼
 
 Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
@@ -39,7 +39,7 @@ void setup() {
     strip.setBrightness(BRIGHTNESS);
     strip.show(); // 初始熄灭
 }
-
+/*
 void loop() {
     static uint16_t hue = 0;          // 色相 0~360
     static unsigned long lastTime = 0;
@@ -49,7 +49,7 @@ void loop() {
         lastTime = millis();
         
         // 根据当前色相计算 RGB 并设置 LED
-        uint32_t color = hsvToRgb(hue, 255, 255); // 饱和度、亮度均最大，最终亮度由 setBrightness 控制
+        uint32_t color = hsvToRgb(hue, 255, BRIGHTNESS); // 饱和度、亮度均最大，最终亮度由 setBrightness 控制
         strip.setPixelColor(0, color);
         strip.show();
         
@@ -58,3 +58,4 @@ void loop() {
         if (hue >= 360) hue = 0;
     }
 }
+*/

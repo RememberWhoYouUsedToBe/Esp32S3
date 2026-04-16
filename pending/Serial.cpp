@@ -1,14 +1,15 @@
 #include <Arduino.h>
 
+int Note = 0;
+
 void setup(){
     Serial.begin(115200);
-    while (!Serial);
-    delay(2000);    // 等待2秒，让电脑和监视器完成连接
+    delay(3000);
     Serial.println("Hello_World");
 }
 
 void loop(){
-    Serial.println("ESP32");
+    Serial.println(Note);
     delay(1000);
-
+    Note ++;
 }

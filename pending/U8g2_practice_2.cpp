@@ -15,15 +15,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 #define I2C_SDA 4   // SDA：GPIO4
 #define I2C_SCL 5   // SCL：GPIO5
 
-#define PWR_OUT 1   // 输出高电平：GPIO1
-#define PWR_IN 2    // 接收电平：GPIO2
-
-#define LED_PWR_OUT 7   // LED输出脚
-
-#define LED_PIN 16          // PWM 引脚: GPIO16
-#define CHANNEL 0           // LEDC 通道 0
-#define PWM_FREQ 5000       // PWM 频率 5kHz
-#define PWM_RES 8           // 分辨率 8 位（0～255）
+int Num = 0;
 
 void setup () {
     // I2C初始化
@@ -34,28 +26,15 @@ void setup () {
     u8g2.enableUTF8Print();
     u8g2.setFont(u8g2_font_wqy16_t_gb2312);
     u8g2.setFontPosTop();
-
-    pinMode(PWR_OUT, OUTPUT);
-    pinMode(LED_PWR_OUT, OUTPUT);
-    pinMode(PWR_IN, INPUT_PULLUP);
-    digitalWrite(PWR_OUT, HIGH);
-    digitalWrite(LED_PWR_OUT, HIGH);
-
-    ledcSetup(CHANNEL, PWM_FREQ, PWM_RES);
-    ledcAttachPin(LED_PIN, CHANNEL);
-
+    delay(5000);
     Serial.print("初始化完成\n");
 }
 
 void loop() {
-    // 渐亮：占空比从 0 增加到 255
-    for (int duty = 0; duty <= 255; duty++) {
-        ledcWrite(CHANNEL, duty);
-        delay(5);           // 控制变化速度
-    }
-    // 渐暗：占空比从 255 减少到 0
-    for (int duty = 255; duty >= 0; duty--) {
-        ledcWrite(CHANNEL, duty);
-        delay(5);
-    }
+    u8g2.clearBuffer();
+    u8g2.setCursor(5,5);
+    u8g2.println(Num);
+    u8g2.sendBuffer(); // 必须调用
+    Num ++;
+    delay(1000);
 }

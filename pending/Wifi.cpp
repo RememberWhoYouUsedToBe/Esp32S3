@@ -7,7 +7,7 @@ const char* password = "888788888";
 
 void setup() {
   Serial.begin(115200);
-  delay(1000); // 等待串口稳定
+  delay(5000); // 等待串口稳定
   Serial.println("\n\nESP32-S3 网络信息获取程序开始...");
 
   // 1. 获取并打印 MAC 地址
